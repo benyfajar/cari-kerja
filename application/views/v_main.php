@@ -29,6 +29,9 @@
     </footer>
     <!-- Akhir Footer -->
 
+    <script>
+    </script>
 </body>
+
 
 </html>

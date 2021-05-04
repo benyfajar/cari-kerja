@@ -4,7 +4,7 @@ class M_data extends CI_Model
 {
     function ambilDataS($table, $field)
     {
-        $this->db->order_by($field, "desc");
+        $this->db->order_by($field, "asc");
         $q = $this->db->get($table)->result();
         return $q;
     }
@@ -33,5 +33,13 @@ class M_data extends CI_Model
     function jumlah_data($table)
     {
         return $this->db->get($table)->num_rows();
+    }
+
+    function dataSubKategori($number, $offset)
+    {
+        $this->db->select('s.*, k.kategori');
+        $this->db->join('kategori k', 'k.kd_kat=s.kd_kat');
+        $q = $this->db->get('sub_kategori s')->result();
+        return $q;
     }
 }

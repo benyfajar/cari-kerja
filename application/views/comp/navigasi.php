@@ -22,7 +22,7 @@
                     <a href="<?= base_url() ?>welcome/kategori" class="nav-link <?php if ($active === 'kategori') : ?>active<?php endif; ?>">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Sub Kategori</a>
+                    <a href="<?= base_url() ?>welcome/subKategori" class="nav-link <?php if ($active === 'subKategori') : ?>active<?php endif; ?>" class="nav-link">Sub Kategori</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Cari</a>
