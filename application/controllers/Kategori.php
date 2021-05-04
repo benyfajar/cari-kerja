@@ -94,5 +94,14 @@ class Kategori extends CI_Controller
         endif;
         return $kode;
     }
+
+    function ambilSubKategori()
+    {
+        $subKategori = $this->data->ambilDataSubKategori($this->input->post('id_sub'));
+        echo json_encode($subKategori);
+    }
+
+
+
     /* +++++++++++++++++ Sub Kategori +++++++++++++++++++++++ */
 }

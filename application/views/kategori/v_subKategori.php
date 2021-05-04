@@ -208,17 +208,19 @@
         var id = $(this).attr('aktid');
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('kategori/ambilKategori') ?>",
+            url: "<?php echo base_url('kategori/ambilSubKategori') ?>",
             dataType: "JSON",
             data: {
-                id_kat: id
+                id_sub: id
             },
             success: function(data) {
                 var i;
                 for (i = 0; i < data.length; i++) {
-                    // alert(data[i].kd_kat)
-                    $("#id-kat").val(data[i].kd_kat);
-                    $("#name-kategori").val(data[i].kategori);
+                    $("#id-sub").val(data[i].kd_sub);
+                    $("#kategori").val(data[i].kd_kat);
+                    var newOption = new Option('', data[i].kd_kat, false, false);
+                    $('#kategori').append(newOption).trigger('change');
+                    $("#name-subkategori").val(data[i].nama);
                 }
 
             }

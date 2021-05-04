@@ -50,4 +50,11 @@ class M_kategori extends CI_Model
         $q = $this->db->insert('sub_kategori', $data);
         return $q;
     }
+
+    function ambilDataSubKategori($id)
+    {
+        $this->db->where("kd_sub", $id);
+        $q = $this->db->get('sub_kategori')->result();
+        return $q;
+    }
 }
