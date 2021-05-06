@@ -3,8 +3,8 @@
         z-index: 100000;
     }
 </style>
-<div class="col-sm-12 col-md-12">
-    <div class="row">
+<div class="col-sm-12 col-md-12 ">
+    <div class="row my-3">
         <div class="col-xs-12">
             <h3 class="pull-left"><?= $header; ?></h3>
             <button id="btnTambah" class="btn btn-primary pull-right mb-3 " data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah</button>
@@ -93,11 +93,11 @@
 <script>
     // In your Javascript (external .js resource or <script> tag)
     $(document).ready(function() {
-        $('.select2').select2({
-            // width: '80%'
-            width: '60%',
-            theme: "classic"
-        });
+        // $('.select2').select2({
+        //     // width: '80%'
+        //     width: '60%',
+        //     theme: "classic"
+        // });
     });
 
 
@@ -162,45 +162,52 @@
 
 
         } else {
-            // var kat = $("#name-kategori").val();
-            // var idKat = $("#id-kat").val();
-            // $.ajax({
-            //     type: "POST",
-            //     url: "<?php echo base_url('kategori/edit_kategori') ?>",
-            //     dataType: "JSON",
-            //     data: {
-            //         kategori: kat,
-            //         id_kat: idKat
-            //     },
-            //     success: function(data) {
-            //         if (data === "berhasil") {
-            //             $('#name-kategori').val("");
-            //             $('#staticBackdrop').modal('hide');
+            var kat = $("#kategori").val();
+            var idSub = $("#id-sub").val();
+            var name = $("#name-subkategori").val();
 
-            //             Swal.fire({
-            //                 position: 'center',
-            //                 icon: 'success',
-            //                 title: 'Kategori Berhasil diubah',
-            //                 showConfirmButton: true,
-            //                 timer: 1500
-            //             }).then(function() {
-            //                 location.reload();
-            //             })
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('kategori/edit_subKategori') ?>",
+                dataType: "JSON",
+                data: {
+                    kd_kat: kat,
+                    kd_sub: idSub,
+                    nama: name
+                },
+                success: function(data) {
+                    if (data === "berhasil") {
+                        $('#name-subkategori').val("");
+                        $("#kategori").val("");
+                        $("#id-sub").val("");
+                        $('#staticBackdrop').modal('hide');
+
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Sub Kategori Berhasil diubah',
+                            showConfirmButton: true,
+                            timer: 1500
+                        }).then(function() {
+                            location.reload();
+                        })
 
 
-            //         } else {
-            //             Swal.fire({
-            //                 position: 'center',
-            //                 icon: 'error',
-            //                 title: 'Kategori Gagal diubah',
-            //                 showConfirmButton: true,
-            //                 timer: 1500
-            //             }).then(function() {
-            //                 location.reload();
-            //             })
-            //         }
-            //     }
-            // })
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Sub Kategori Gagal diubah',
+                            showConfirmButton: true,
+                            timer: 1500
+                        }).then(function() {
+                            location.reload();
+                        })
+                    }
+                }
+            })
+
+
         }
     });
 
@@ -218,13 +225,18 @@
                 for (i = 0; i < data.length; i++) {
                     $("#id-sub").val(data[i].kd_sub);
                     $("#kategori").val(data[i].kd_kat);
-                    var newOption = new Option('', data[i].kd_kat, false, false);
-                    $('#kategori').append(newOption).trigger('change');
+                    // var newOption = new Option('', data[i].kd_kat, false, false);
+                    // $('#kategori').append(newOption).trigger('change');
                     $("#name-subkategori").val(data[i].nama);
                 }
 
             }
         })
+    })
+
+    $("#btnBatal").click(function() {
+        $("#kategori").val("");
+        $("#name-subkategori").val("");
     })
 
 
@@ -234,7 +246,7 @@
         Swal.fire({
             title: 'Hapus Data ini ?',
             text: "Data tidak dapat di kembalikan lagi!",
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -242,23 +254,24 @@
             confirmButtonText: 'Ya!'
         }).then((result) => {
             if (result.isConfirmed) {
-
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('kategori/delKat') ?>",
+                    url: "<?php echo base_url('kategori/delSubKat') ?>",
                     dataType: "JSON",
                     data: {
-                        id_kat: id
+                        id_sub: id
                     },
                     success: function(data) {
                         if (data === "berhasil") {
-                            $('#name-kategori').val("");
+                            $('#name-subkategori').val("");
+                            $('#kategori').val("");
+                            $('#id-sub').val("");
                             $('#staticBackdrop').modal('hide');
 
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
-                                title: 'Kategori Telah dihapus !!',
+                                title: 'Sub Kategori Telah dihapus !!',
                                 showConfirmButton: true,
                                 timer: 1500
                             }).then(function() {

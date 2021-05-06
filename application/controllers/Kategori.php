@@ -36,7 +36,11 @@ class Kategori extends CI_Controller
 
     function delKat()
     {
-        $del = $this->data->hapusKategori($this->input->post('id_kat'));
+        $where = array(
+            'kd_kat' => $this->input->post("id_kat")
+        );
+        $del = $this->data->hapus($where, 'kategori');
+        // $del = $this->data->hapusKategori($this->input->post('id_kat'));
         if ($del == 1) :
             echo json_encode("berhasil");
         else :
@@ -99,6 +103,34 @@ class Kategori extends CI_Controller
     {
         $subKategori = $this->data->ambilDataSubKategori($this->input->post('id_sub'));
         echo json_encode($subKategori);
+    }
+
+    function edit_subKategori()
+    {
+        $data = array(
+            'kd_kat' => $this->input->post('kd_kat'),
+            'nama' => $this->input->post('nama')
+        );
+
+        $ubah = $this->data->ubahDataSubKategori($data, $this->input->post('kd_sub'));
+        if ($ubah == 1) :
+            echo json_encode("berhasil");
+        else :
+            echo json_encode("gagal");
+        endif;
+    }
+
+    function delSubKat()
+    {
+        $where = array(
+            'kd_sub' => $this->input->post("id_sub")
+        );
+        $hapus = $this->data->hapus($where, 'sub_kategori');
+        if ($hapus == 1) :
+            echo json_encode("berhasil");
+        else :
+            echo json_encode("gagal");
+        endif;
     }
 
 
