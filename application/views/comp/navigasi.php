@@ -1,3 +1,25 @@
+<style>
+    @media (max-width: 990px) {
+        #clip-user {
+            display: none;
+        }
+
+        #clip-user2 {
+            display: block;
+        }
+    }
+
+    @media (min-width: 992px) {
+        #clip-user {
+            display: block;
+        }
+
+        #clip-user2 {
+            display: none;
+        }
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid  mx-3">
         <img src="<?php echo base_url() ?>assets/img/logo.png" alt="" width="50" height="50" class="d-inline-block align-text-top">
@@ -16,7 +38,7 @@
                     <a class="nav-link" href="#">Lowongan</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Jadwal</a>
+                    <a href="<?= base_url() ?>welcome/jadwal" class="nav-link">Jadwal</a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url() ?>welcome/kategori" class="nav-link <?php if ($active === 'kategori') : ?>active<?php endif; ?>">Kategori</a>
@@ -33,7 +55,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link"></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" id="clip-user">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?php echo base_url() ?>/assets/img/user.png" width="25" alt="">
                     </a>
@@ -46,6 +68,9 @@
                         </li>
                         <li><a class="dropdown-item" href="<?= base_url() ?>login/doLogout">Keluar</a></li>
                     </ul>
+                </li>
+                <li class="nav-item" id="clip-user2">
+                    <a href="<?= base_url() ?>login/doLogout" class="nav-link">Keluar</a>
                 </li>
             </ul>
         </div>

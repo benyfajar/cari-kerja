@@ -39,7 +39,15 @@ class M_data extends CI_Model
     {
         $this->db->select('s.*, k.kategori');
         $this->db->join('kategori k', 'k.kd_kat=s.kd_kat');
-        $q = $this->db->get('sub_kategori s')->result();
+        $q = $this->db->get('sub_kategori s', $number, $offset)->result();
+        return $q;
+    }
+
+    function dataJadwal()
+    {
+        $this->db->select('l.nama_loker, j.*');
+        $this->db->join('web_loker l', 'l.kd_loker=j.kd_loker');
+        $q = $this->db->get("jadwal j")->result();
         return $q;
     }
 }

@@ -133,4 +133,16 @@ class Welcome extends CI_Controller
 
 		$this->load->view("v_main", $data);
 	}
+	public function jadwal()
+	{
+		$data['tittle'] = "Jadwal Scraping || Cari-Kerja.site";
+		$data['header'] = "Jadwal Scraping";
+		$data['active'] = "jadwal";
+		$data['content'] = "scrap/v_jadwal";
+
+		$data['webLoker'] = $this->m_data->ambilDataS('web_loker', 'nama_loker');
+		$data['listData'] = $this->m_data->dataJadwal();
+
+		$this->load->view("v_main", $data);
+	}
 }
